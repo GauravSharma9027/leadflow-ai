@@ -16,7 +16,8 @@
  * This file only creates and exports the transporter.
  * ------------------------------------------------------------------
  */
-
+import dns from "dns";
+dns.setDefaultResultOrder("ipv4first");
 import nodemailer from "nodemailer";
 import logger from "../helpers/logger.js";
 
@@ -90,6 +91,57 @@ console.log({
     user: process.env.SMTP_USER
 });
 
+// const transporter = nodemailer.createTransport({
+
+//     host: "smtp.gmail.com",
+
+//     port: 587,
+
+//     secure: false,
+
+//     auth: {
+
+//         user: process.env.SMTP_USER,
+
+//         pass: process.env.SMTP_PASS,
+
+//     },
+
+//     connectionTimeout: 20000,
+
+//     greetingTimeout: 20000,
+
+//     socketTimeout: 20000
+
+// });
+
+// const transporter = nodemailer.createTransport({
+
+//     host: "smtp.gmail.com",
+
+//     port: 587,
+
+//     secure: false,
+
+//     auth: {
+
+//         user: process.env.SMTP_USER,
+
+//         pass: process.env.SMTP_PASS,
+
+//     },
+
+//     requireTLS: true,
+
+//     connectionTimeout: 20000,
+
+//     greetingTimeout: 20000,
+
+//     socketTimeout: 20000
+
+// });
+
+
 const transporter = nodemailer.createTransport({
 
     host: "smtp.gmail.com",
@@ -99,12 +151,11 @@ const transporter = nodemailer.createTransport({
     secure: false,
 
     auth: {
-
         user: process.env.SMTP_USER,
-
         pass: process.env.SMTP_PASS,
-
     },
+
+    requireTLS: true,
 
     connectionTimeout: 20000,
 
@@ -113,6 +164,7 @@ const transporter = nodemailer.createTransport({
     socketTimeout: 20000
 
 });
+
 transporter.verify((error, success) => {
     if (error) {
         logger.error("SMTP verification failed", error);

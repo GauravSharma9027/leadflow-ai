@@ -101,110 +101,37 @@ const CreateCampaign = () => {
     };
 
     const handleSubmit = async (e) => {
-
-
         e.preventDefault();
 
-
-
         try {
-
-
             setLoading(true);
-
-
             setResult(null);
 
-
             const payload = {
-
-
                 sheetUrl: formData.sheetUrl,
-
-
                 range: formData.range,
-
-
                 subject: formData.subject,
-
-
                 template: formData.template
-
-
             };
 
+            console.log("Campaign Payload:", payload);
 
-
-
-
-            console.log(
-                "Campaign Payload:",
-                payload
-            );
-
-
-
-
-
-            const response =
-                await startCampaign(
-                    payload
-                );
-
-
-
-
+            const response = await startCampaign(payload);
 
             setResult(response);
 
-
-
-            toast.success(
-                "Campaign completed successfully"
-            );
-
-
-
-        }
-
-        catch (error) {
-
-
-            console.error(
-                "Campaign Error:",
-                error
-            );
-
-
+            toast.success("Campaign completed successfully");
+        } catch (error) {
+            console.error("Campaign Error:", error);
 
             toast.error(
-
                 error?.response?.data?.message ||
-
                 "Campaign failed"
-
             );
-
-
-        }
-
-        finally {
-
-
+        } finally {
             setLoading(false);
-
-
         }
-
-
     };
-
-
-
-
-
-
-
 
     return (
 
@@ -571,45 +498,12 @@ const CreateCampaign = () => {
 
                 </div>
 
-
-
-
-
-
-
-
-
                 <button
-
                     disabled={loading}
-
-
-                    className="
-                    w-full
-                    py-4
-                    rounded-2xl
-                    bg-gradient-to-r
-                    from-purple-600
-                    to-cyan-500
-                    flex
-                    justify-center
-                    items-center
-                    gap-2
-                    font-semibold
-                    transition
-                    hover:scale-[1.02]
-                    disabled:opacity-50
-                    "
-
-                >
-
-
+                    className="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-cyan-500 flex
+                    justify-center items-center gap-2 font-semibold transition hover:scale-[1.02] disabled:opacity-50">
                     {
-
-                        loading
-
-                            ?
-
+                        loading ?
                             <>
 
                                 <Loader2 className="animate-spin" />
@@ -624,28 +518,11 @@ const CreateCampaign = () => {
                             <>
 
                                 <Send />
-
                                 Start Campaign
-
                             </>
-
-
                     }
-
-
                 </button>
-
-
-
             </form>
-
-
-
-
-
-
-
-
 
             {
                 result && (
@@ -772,14 +649,6 @@ mt-6
     );
 
 };
-
-
-
-
-
-
-
-
 
 const Input = ({
     label,

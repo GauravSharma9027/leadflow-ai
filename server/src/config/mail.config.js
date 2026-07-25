@@ -16,8 +16,7 @@
  * This file only creates and exports the transporter.
  * ------------------------------------------------------------------
  */
-import dns from "dns";
-dns.setDefaultResultOrder("ipv4first");
+
 import nodemailer from "nodemailer";
 import logger from "../helpers/logger.js";
 
@@ -144,24 +143,23 @@ console.log({
 
 const transporter = nodemailer.createTransport({
 
-    host: "smtp.gmail.com",
+    host: process.env.SMTP_HOST,
 
-    port: 587,
+    port: Number(process.env.SMTP_PORT),
 
     secure: false,
 
     auth: {
+
         user: process.env.SMTP_USER,
+
         pass: process.env.SMTP_PASS,
+
     },
 
-    requireTLS: true,
-
-    connectionTimeout: 20000,
-
-    greetingTimeout: 20000,
-
-    socketTimeout: 20000
+    tls: {
+        rejectUnauthorized: false
+    }
 
 });
 

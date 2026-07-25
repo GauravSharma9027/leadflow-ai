@@ -1,8 +1,6 @@
 import React, {
     useState
 } from "react";
-
-
 import {
     Send,
     FileText,
@@ -13,26 +11,14 @@ import {
     MailCheck,
     MailX
 } from "lucide-react";
-
-
 import toast from "react-hot-toast";
-
-
 import SheetUploader from "../../components/campaign/SheetUploader";
-
-
 import {
     startCampaign
 } from "../../services/api/campaign.api";
 import ResultCard from "../../components/campaign/ResultCard";
 
-
-
-
-
 const CreateCampaign = () => {
-
-
     const [formData, setFormData] = useState({
 
         sheetUrl: "",
@@ -44,62 +30,24 @@ const CreateCampaign = () => {
         template: ""
 
     });
-
-
-
     const [sheetPreview, setSheetPreview] = useState([]);
-
-
     const [loading, setLoading] = useState(false);
-
-
     const [result, setResult] = useState(null);
-
-
-
-
-
-
-
     const handleChange = (e) => {
-
-
         setFormData({
-
             ...formData,
-
             [e.target.name]: e.target.value
-
         });
-
-
     };
-
-
-
-
-
-
-
     const handleSheetPreview = (response) => {
-
-
         console.log(
             "Sheet Preview Response:",
             response
         );
-
-
-
         setSheetPreview(
-
             response?.data?.preview || []
-
         );
-
-
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -132,17 +80,11 @@ const CreateCampaign = () => {
             setLoading(false);
         }
     };
-
     return (
-
-
         <div className="
         text-white
         space-y-8
         ">
-
-
-
             <div>
 
 
